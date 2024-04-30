@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+
+athena:
+  spring:
+    alioss:
+      enabled: ${ALIOSS_ENABLED}
+  acceptance-test:
+    enabled: ${ACCEPTANCE_TEST_ENABLED}
