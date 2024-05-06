@@ -51,6 +51,8 @@ class DockerComposeITSpec extends Specification{
     FileStore fileStore
 
     def setup() {
+        COMPOSE.start()
+
         Account account = buildAccount()
 
         final Container container = account.getContainer(SwiftFileStore.DEFAULT_CONTAINER)
