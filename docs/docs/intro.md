@@ -17,6 +17,9 @@ sidebar_position: 1
 [//]: # (See the License for the specific language governing permissions and)
 [//]: # (limitations under the License.)
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Getting Started
 ===============
 
@@ -36,44 +39,46 @@ Docker Compose
 With docker compose, you can quickly set up a complete Minerva application by starting two services: web service and
 database service.
 
-Since `build` is already included in the docker-compose.yml file, you only need to navigate to Minerva's root directory and
-execute one command: `docker compose up`.
+Since `build` is already included in the docker-compose.yml file, you only need to navigate to Minerva's root directory
+and execute one command: `docker compose up`.
 
-Inside [docker-compose.yml][docker-compose.yml] :
+When the Minerva application is started successfully, you can upload files to and download the file you need from
+Ali Cloud OSS as you like. In addition to this, you can also query the metadata information of the file from database.
 
-```yaml
-services:
-  web:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db/athena?serverTimezone=UTC
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
-      - SPRING_JDBC_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect
-      - HIBERNATE_HBM2DDL_AUTO=create
-      - ATHENA_SPRING_ALIOSS_ENABLED=true
-      - ATHENA_TEST_ENABLED=true
-    depends_on:
-      db:
-        condition: service_healthy
-  db:
-    image: "mysql:5.7.43"
-    ports:
-      - "3306:3306"
-    volumes:
-      - "${MYSQL_INIT_SCRIPT_PATH:-./mysql-init.sql}:/docker-entrypoint-initdb.d/mysql-init.sql"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    command: --character-set-server=utf8 --collation-server=utf8_general_ci
-    healthcheck:
-      test: mysqladmin ping -h localhost -u root -proot
-      timeout: 3s
-      retries: 3
-```
+File Metadata
+--------------
 
-When the Minerva application is started successfully, you can upload files to and download the file you need from Ali Cloud OSS as you like.
+### Inserting file metadata
 
-[docker-compose.yml]:https://github.com/paion-data/minerva/blob/master/docker-compose.yml
+We can insert a file metadata record by specifying the file's unique identifier fileId, the name of the file and the
+file type.
+
+<Tabs>
+  <TabItem value="graphql" label="GraphQL">
+    ```graphql
+    mutation createMetaData {
+        createMetaData(fileId: "fileId123", fileName: "pride-and-prejudice.pdf", fileType: "PDF") {
+            fileName,
+            fileType
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+### Querying file metadata
+
+We can get the corresponding file metadata by using fileId.
+
+<Tabs>
+  <TabItem value="graphql" label="GraphQL">
+    ```graphql
+    query {
+        metaData(fileId: "fileId123") {
+            fileType
+            fileName
+        }
+    }
+    ```
+  </TabItem>
+</Tabs>
