@@ -5,15 +5,14 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MODEL_PACKAGE_NAME=${MODEL_PACKAGE_NAME}
-      - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_DRIVER=com.mysql.jdbc.Driver
-      - DB_DIALECT=org.hibernate.dialect.MySQLDialect
-      - DB_URL=jdbc:mysql://db/athena?serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/athena?serverTimezone=UTC
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
+      - SPRING_JDBC_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect
       - HIBERNATE_HBM2DDL_AUTO=create
-      - ALIOSS_ENABLED=true
-      - ACCEPTANCE.TEST.ENABLED=true
+      - ATHENA_SPRING_ALIOSS_ENABLED=true
+      - ATHENA_TEST_ENABLED=true
     depends_on:
       db:
         condition: service_healthy

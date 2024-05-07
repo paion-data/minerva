@@ -38,7 +38,7 @@ public class TestClientConfig {
      */
     @Primary
     @Bean
-    @ConditionalOnProperty(name = "athena.acceptance-test.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "athena.test.enabled", havingValue = "true")
     public OSS testOSSClient() {
         return new TestOSSClient();
     }
