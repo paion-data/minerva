@@ -34,12 +34,13 @@ Docker Compose
 --------------
 
 With docker compose, you can quickly set up a complete Minerva application by starting two services: web service and
-database service. 
+database service.
 
 Since `build` is already included in the docker-compose.yml file, you only need to navigate to Minerva's root directory and
 execute one command: `docker compose up`.
 
 Inside [docker-compose.yml][docker-compose.yml] :
+
 ```yaml
 services:
   web:
