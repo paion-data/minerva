@@ -55,6 +55,7 @@ file type.
 
 <Tabs>
   <TabItem value="graphql" label="GraphQL">
+
     ```graphql
     mutation createMetaData {
         createMetaData(fileId: "fileId123", fileName: "pride-and-prejudice.pdf", fileType: "PDF") {
@@ -63,6 +64,7 @@ file type.
         }
     }
     ```
+
   </TabItem>
 </Tabs>
 
@@ -72,6 +74,7 @@ We can get the corresponding file metadata by using fileId.
 
 <Tabs>
   <TabItem value="graphql" label="GraphQL">
+
     ```graphql
     query {
         metaData(fileId: "fileId123") {
@@ -80,5 +83,6 @@ We can get the corresponding file metadata by using fileId.
         }
     }
     ```
+
   </TabItem>
 </Tabs>
