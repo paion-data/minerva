@@ -1,17 +1,5 @@
-/*
- * Copyright 2024 Paion Data
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * Copyright 2024 Paion Data. All rights reserved.
  */
 package com.paiondata.minerva
 
@@ -27,6 +15,7 @@ import org.javaswift.joss.client.factory.AuthenticationMethod
 import org.javaswift.joss.model.Account
 import org.javaswift.joss.model.Container
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.spock.Testcontainers
 
 import jakarta.validation.constraints.NotNull
@@ -34,6 +23,7 @@ import spock.lang.Specification
 import spock.lang.Subject
 
 import java.nio.charset.StandardCharsets
+import java.time.Duration
 
 @Testcontainers
 class DockerComposeITSpec extends Specification{
@@ -44,15 +34,14 @@ class DockerComposeITSpec extends Specification{
     final DockerComposeContainer COMPOSE = new DockerComposeContainer(new java.io.File("docker-compose.yml"))
             .withExposedService(
                     "web",
-                    WS_PORT
+                    WS_PORT,
+                    Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(30))
             )
 
     @Subject
     FileStore fileStore
 
     def setup() {
-        COMPOSE.start()
-
         Account account = buildAccount()
 
         final Container container = account.getContainer(SwiftFileStore.DEFAULT_CONTAINER)
@@ -63,10 +52,6 @@ class DockerComposeITSpec extends Specification{
         }
 
         fileStore = new SwiftFileStore(account, buildFileIdGenerator())
-    }
-
-    def cleanup() {
-        COMPOSE.stop()
     }
 
     @SuppressWarnings("GroovyAccessibility")

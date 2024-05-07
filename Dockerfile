@@ -24,7 +24,6 @@ ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 RUN apt update
 RUN apt upgrade -y
 RUN apt install software-properties-common -y
-RUN apt install wget
 
 # Install JDK 17 - https://www.rosehosting.com/blog/how-to-install-java-17-lts-on-ubuntu-20-04/
 RUN apt update -y
@@ -32,4 +31,4 @@ RUN apt install openjdk-17-jdk -y
 
 COPY ./target/minerva-$WS_VERSION.jar /app/minerva.jar
 
-CMD ["java","-jar","/app/minerva.jar"]
+CMD ["java", "-jar", "/app/minerva.jar"]
