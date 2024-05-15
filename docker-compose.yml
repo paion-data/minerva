@@ -8,16 +8,17 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_URL=jdbc:mysql://db/athena?serverTimezone=UTC
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_JDBC_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect
-      - HIBERNATE_HBM2DDL_AUTO=create
-      - ATHENA_SPRING_ALIOSS_ENABLED=true
+      - ATHENA_SPRING_ALIOSS_ENABLED=false
       - ATHENA_TEST_ENABLED=true
+      - athena__alioss_endpoint_key=test_key
+      - athena__table_name=TEST_META_DATA
     depends_on:
       db:
         condition: service_healthy
   db:
-    image: "mysql:5.7.43"
+    image: "mysql:8.0.26"
     ports:
       - "3306:3306"
     volumes:
