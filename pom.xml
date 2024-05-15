@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.paiondata.athena</groupId>
             <artifactId>athena-spring-boot-starter</artifactId>
-            <version>1.0.22</version>
+            <version>1.0.26</version>
         </dependency>
 
         <dependency>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.paiondata.athena</groupId>
             <artifactId>athena-filestore-swift</artifactId>
-            <version>1.0.18</version>
+            <version>1.0.26</version>
         </dependency>
 
         <dependency>
