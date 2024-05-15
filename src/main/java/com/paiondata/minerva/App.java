@@ -17,6 +17,7 @@ package com.paiondata.minerva;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Spring Boot application startup class
@@ -25,6 +26,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * the entire Spring Boot application.
  */
 @SpringBootApplication
+@ComponentScan(value = {"com.paiondata.athena.spring.boot.autoconfigure", "com.paiondata.minerva.config"})
 public class App {
     /**
      * Start the SpringBoot application.

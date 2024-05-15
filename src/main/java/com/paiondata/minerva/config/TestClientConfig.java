@@ -17,11 +17,16 @@ package com.paiondata.minerva.config;
 
 import com.aliyun.oss.OSS;
 import com.paiondata.aliOSS.TestOSSClient;
+import com.paiondata.athena.file.identifier.FileIdGenerator;
+import com.paiondata.athena.filestore.FileStore;
+import com.paiondata.athena.filestore.alioss.AliOSSFileStore;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Configuration for TestClient.
@@ -41,5 +46,18 @@ public class TestClientConfig {
     @ConditionalOnProperty(name = "athena.test.enabled", havingValue = "true")
     public OSS testOSSClient() {
         return new TestOSSClient();
+    }
+
+    /**
+     * Uses an in-memory file store.
+     *
+     * @param ossClient  The injected file storage client
+     * @param fileIdGenerator  The file ID generator
+     *
+     * @return a new instance
+     */
+    @Bean
+    FileStore fileStore(@NotNull final OSS ossClient, @NotNull final FileIdGenerator fileIdGenerator) {
+        return new AliOSSFileStore(ossClient, fileIdGenerator);
     }
 }

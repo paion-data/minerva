@@ -15,7 +15,7 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="A-Little-Excited"
-LABEL maintainer-email="3030036858@qq.com"
+LABEL maintainer-email="siyangchen@paion-data.dev"
 
 ARG WS_VERSION=1.0-SNAPSHOT
 
