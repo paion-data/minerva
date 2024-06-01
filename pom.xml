@@ -17,6 +17,7 @@
     </parent>
 
     <properties>
+        <version.athena>1.0.28</version.athena>
         <checkstyle.skip>false</checkstyle.skip>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -33,7 +34,7 @@
         <dependency>
             <groupId>com.paiondata.athena</groupId>
             <artifactId>athena-spring-boot-starter</artifactId>
-            <version>1.0.22</version>
+            <version>${version.athena}</version>
         </dependency>
 
         <dependency>
@@ -44,7 +45,7 @@
         <dependency>
             <groupId>com.paiondata.athena</groupId>
             <artifactId>athena-filestore-swift</artifactId>
-            <version>1.0.18</version>
+            <version>${version.athena}</version>
         </dependency>
 
         <dependency>
