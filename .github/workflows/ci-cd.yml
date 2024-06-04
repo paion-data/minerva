@@ -26,7 +26,7 @@ env:
 
 jobs:
   yml-md-style-and-link-checks:
-    uses: paion-data/github-actions-core/.github/workflows/yml-md-style-and-link-checks.yml@master
+    uses: paion-data/ci-cd-core/.github/workflows/yml-md-style-and-link-checks.yml@master
 
   tests:
     name: Unit & Integration Tests
@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK
-        uses: paion-data/github-actions-core/.github/actions/jdk-setup@master
+        uses: paion-data/ci-cd-core/.github/actions/jdk-setup@master
       - name: Run unit & integration tests
         run: mvn -B clean verify
 
@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: 18
       - name: Test environment setup
-        uses: paion-data/github-actions-core/.github/actions/jdk-setup@master
+        uses: paion-data/ci-cd-core/.github/actions/jdk-setup@master
       - name: Install dependencies
         working-directory: docs
         run: yarn
